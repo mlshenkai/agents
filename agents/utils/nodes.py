@@ -6,8 +6,13 @@ from langgraph.prebuilt import ToolNode
 from dotenv import load_dotenv
 import os
 
-from .state import AgentState
-from .tools import ALL_TOOLS
+try:
+    from .state import AgentState
+    from .tools import ALL_TOOLS
+except ImportError:
+    # When running as script directly
+    from state import AgentState
+    from tools import ALL_TOOLS
 
 load_dotenv()
 

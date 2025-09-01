@@ -3,8 +3,16 @@ from langgraph.graph.state import StateGraph, CompiledStateGraph
 from langchain_core.messages import HumanMessage
 from langgraph.prebuilt import create_react_agent
 
-from .utils.state import AgentState
-from .utils.nodes import call_model, should_continue, tool_node
+try:
+    from .utils.state import AgentState
+    from .utils.nodes import call_model, should_continue, tool_node
+except ImportError:
+    # When running as script directly
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    from utils.state import AgentState
+    from utils.nodes import call_model, should_continue, tool_node
 
 
 def create_agent() -> CompiledStateGraph:
