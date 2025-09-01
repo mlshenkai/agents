@@ -11,16 +11,13 @@ permissions:
 jobs:
   run_claude:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Claude Code
+      - name: Run Claude Code via Proxy
         uses: anthropics/claude-code-action@v1
         with:
           prompt: ${{ github.event.comment.body }}
         env:
-          ANTHROPIC_BASE_URL: ${{ secrets.ANYROUTER_BASE_URL }}
-          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
